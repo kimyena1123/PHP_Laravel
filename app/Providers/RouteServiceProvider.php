@@ -17,7 +17,9 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @var string
      */
-    public const HOME = '/dashboard';
+//    public const HOME = '/dashboard';
+    public const HOME = '/'; //dashboard 필요없으니까 /로 적용.(회원가입을 하면 dashboard로 갔는데, 그러지 말고 그냥 home 화면만 보이게 설정.
+
 
     /**
      * Define your route model bindings, pattern filters, and other route configuration.

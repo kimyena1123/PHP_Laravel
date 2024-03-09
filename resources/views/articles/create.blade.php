@@ -18,11 +18,15 @@
             font-size: 17px;
             margin-bottom: 10px;
         }
+        form{
+            height: 50%;
+        }
         .write{
             display: block;
             margin-bottom: 10px;
             width: 100%;
             border-radius: 5px;
+            height: 25%;
         }
         .applyBtn{
             padding: 2px 10px;
@@ -43,7 +47,7 @@
 {{--            blade는 위 코드를 사용 안하고 편하게 해주는 기능이 있다.--}}
             @csrf
 
-            <input type="text" class="write" name="body">
+            <input type="text" class="write" name="body" value="{{ old('body') }}">
 
 
             {{--        blade error--}}
@@ -55,10 +59,11 @@
             <button class="applyBtn">저장하기</button>
         </form>
 
-        <!-- 에러 출력
-                all(): 모든 에러 출력
-                any(): 에러가 있는지 없는지 true or false 식으로 알려줌
-        -->
+        {{ dd(request()->old()) }}
+{{--        {{ dd(request()->old('body')) }}--}}
+{{--        {{ dd(request()->all('content')) }}--}}
+
+
 {{--        {{ dd($errors->any()) }}--}}
 {{--       <?php dd($errors); ?> --}}
     </div>

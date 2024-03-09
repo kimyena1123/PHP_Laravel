@@ -6,7 +6,7 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+{{--    @vite(['resources/css/app.css', 'resources/js/app.js'])--}}
 
     <style>
         .container{
@@ -46,6 +46,17 @@
             <input type="text" class="write" name="body">
             <button class="applyBtn">저장하기</button>
         </form>
+{{--        blade error--}}
+        @error('body')
+            <p style="color:red;">{{ $message }}</p>
+        @enderror
+
+        <!-- 에러 출력
+                all(): 모든 에러 출력
+                any(): 에러가 있는지 없는지 true or false 식으로 알려줌
+        -->
+        {{ dd($errors->any()) }}
+{{--       <?php dd($errors); ?> --}}
     </div>
 </body>
 </html>

@@ -43,7 +43,7 @@
 {{--            blade는 위 코드를 사용 안하고 편하게 해주는 기능이 있다.--}}
             @csrf
 
-            <input type="text" class="write">
+            <input type="text" class="write" name="body">
             <button class="applyBtn">저장하기</button>
         </form>
     </div>

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request
 
 /*
 |--------------------------------------------------------------------------
@@ -34,6 +35,35 @@ Route::get('/articles/create', function () {
     return view('articles/create');
 });
 
-Route::post('/articles', function(){
+Route::post('/articles', function(Request $request){
+    //비어있지 않고, 문자열이고, 255자를 넘으면 안된다.
+    //방법1
+    $request->validate([
+        'body' => [
+            'required',
+            'string',
+            'max:255'
+        ],
+    ]);
+
+    //방법2
+//    $request->validate([
+//        'body' => 'required|string|max:255'
+//    ]);
+
+    //방법3
+//    $body = $_POST['body'];
+//
+//    if(!$body){
+//        return redirect() -> back();
+//    }
+//
+//    if(!is_string($body)){
+//        return redirect() -> back();
+//    }
+//
+//    if(strlen($body) > 255){
+//        return redirect() -> back();
+//    }
     return 'hello';
 });

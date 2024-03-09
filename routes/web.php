@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Http\Request
+use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -46,24 +46,5 @@ Route::post('/articles', function(Request $request){
         ],
     ]);
 
-    //방법2
-//    $request->validate([
-//        'body' => 'required|string|max:255'
-//    ]);
-
-    //방법3
-//    $body = $_POST['body'];
-//
-//    if(!$body){
-//        return redirect() -> back();
-//    }
-//
-//    if(!is_string($body)){
-//        return redirect() -> back();
-//    }
-//
-//    if(strlen($body) > 255){
-//        return redirect() -> back();
-//    }
     return 'hello';
 });

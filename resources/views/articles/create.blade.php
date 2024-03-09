@@ -44,18 +44,22 @@
             @csrf
 
             <input type="text" class="write" name="body">
+
+
+            {{--        blade error--}}
+            @error('body')
+            <p style="color:red;">{{ $message }}</p>
+            @enderror
+
+
             <button class="applyBtn">저장하기</button>
         </form>
-{{--        blade error--}}
-        @error('body')
-            <p style="color:red;">{{ $message }}</p>
-        @enderror
 
         <!-- 에러 출력
                 all(): 모든 에러 출력
                 any(): 에러가 있는지 없는지 true or false 식으로 알려줌
         -->
-        {{ dd($errors->any()) }}
+{{--        {{ dd($errors->any()) }}--}}
 {{--       <?php dd($errors); ?> --}}
     </div>
 </body>

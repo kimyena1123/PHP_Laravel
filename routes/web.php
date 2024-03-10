@@ -34,10 +34,12 @@ Route::middleware('auth')->group(function () {
 
 require __DIR__.'/auth.php';
 
+//글 작성하는 페이지
 Route::get('/articles/create', function () {
     return view('articles/create');
 });
 
+///articles/create 페이지에서 작성한 글 저장하기
 Route::post('/articles', function(Request $request){
     //비어있지 않고, 문자열이고, 255자를 넘으면 안된다.
     //방법1
@@ -54,6 +56,17 @@ Route::post('/articles', function(Request $request){
         'user_id' => Auth::id()
     ]);
 
-
     return 'hello';
+});
+
+
+//저장한 글 목록 보여주는 페이지
+Route::get('/articles', function () {
+    $articles = Article::all();
+
+    //넘겨주는 방법1
+    return view('articles/index', ['articleList' => $articles]);
+
+    //넘겨주는 방법2
+//    return view('articles/index') -> with('articleList', $articles);
 });

@@ -59,7 +59,7 @@
             <button class="applyBtn">저장하기</button>
         </form>
 
-        {{ dd(request()->old()) }}
+{{--        {{ dd(request()->old()) }}--}}
 {{--        {{ dd(request()->old('body')) }}--}}
 {{--        {{ dd(request()->all('content')) }}--}}
 

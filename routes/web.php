@@ -95,20 +95,19 @@ Route::post('/articles', function(Request $request){
 //    ]);
 
     //방법3. Eloquent ORM (터미널에 php artisan make:model Article 실행)
-    $article = new \App\Models\Article;
+//    $article = new \App\Models\Article;
+//    //dd($article);
+//    $article->body = $input['body'];
+//    //dd($article->body);
+//    $article->user_id= Auth::id();
+//    $article->save();
     //dd($article);
-    $article->body = $input['body'];
-    //dd($article->body);
-    $article->user_id= Auth::id();
-    $article->save();
-    //dd($article);
 
 
-
-//    Article::create([
-//       'body' => $input['body'],
-//       'user_id' => Auth::id()
-//    ]);
+    Article::create([
+       'body' => $input['body'],
+       'user_id' => Auth::id()
+    ]);
 
     //articles 테이블에서 id=4인 정보 보여줘.
 //    $result = DB::table('articles')->where('id', 4)->first();

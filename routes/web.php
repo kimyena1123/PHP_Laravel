@@ -3,6 +3,8 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -45,22 +47,22 @@ Route::post('/articles', function(Request $request){
             'max:255'
         ],
     ]);
-//    dd($input);
+    //dd($input);
 
-    $host = config('database.connections.mysql.host');
-    $dbname = config('database.connections.mysql.database');
-    $username = config('database.connections.mysql.username');
-    $password = config('database.connections.mysql.password');
-//    dd($host);
+//    $host = config('database.connections.mysql.host');
+//    $dbname = config('database.connections.mysql.database');
+//    $username = config('database.connections.mysql.username');
+//    $password = config('database.connections.mysql.password');
+    //dd($host);
 
     //pdo 객체를 만들고 : $conn = new PDO("mysql:host=호스트명;dbnamae=데이터베이스", 사용자명, 패스워드);
-    $conn = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
+//    $conn = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
 
     //쿼리를 준비하고
-    $stmt = $conn -> prepare("INSERT INTO articles (body, user_id) VALUES (:body, :userId);");
-//    dd($request->collect());
-    $body = $request->input('body');
-//    dd($body);
+//    $stmt = $conn -> prepare("INSERT INTO articles (body, user_id) VALUES (:body, :userId);");
+    //dd($request->collect());
+//    $body = $request->input('body');
+    //dd($body);
 
     //사용자 아이디 가져오는 방법1
     //dd($request->user()->id);
@@ -69,14 +71,21 @@ Route::post('/articles', function(Request $request){
     //dd(\Illuminate\Support\Facades\Auth::user()->id);
 
     //사용자 아이디 가져오는 방법3
-    //dd(\Illuminate\Support\Facades\Auth::id());
+//    dd(Auth::id());
 
     //쿼리 값을 설정하고
-    $stmt->bindValue(':body', $input['body']);
-    $stmt->bindValue(':userId', $request->user()->id);
+//    $stmt->bindValue(':body', $input['body']);
+//    $stmt->bindValue(':userId', $request->user()->id);
 
     //실행
-    $stmt->execute();
+//    $stmt->execute();
+
+    // 쿼리를 실행
+    //DB 피사드를 이용하는 방법
+    \Illuminate\Support\Facades\DB::statement("INSERT INTO articles (body, user_id) VALUES (:body, :userId)", [
+        'body' => $input['body'],
+        'userId' => Auth::id(),
+    ]);
 
     return 'hello';
 });

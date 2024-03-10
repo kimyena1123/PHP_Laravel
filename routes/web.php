@@ -82,9 +82,15 @@ Route::post('/articles', function(Request $request){
 
     // 쿼리를 실행
     //DB 피사드를 이용하는 방법
-    \Illuminate\Support\Facades\DB::statement("INSERT INTO articles (body, user_id) VALUES (:body, :userId)", [
-        'body' => $input['body'],
-        'userId' => Auth::id(),
+//    \Illuminate\Support\Facades\DB::statement("INSERT INTO articles (body, user_id) VALUES (:body, :userId)", [
+//        'body' => $input['body'],
+//        'userId' => Auth::id(),
+//    ]);
+
+    //쿼리 빌더를 사용하는 방법
+    DB::table('articles')->insert([
+        'body'=>$input['body'],
+        'user_id'=>Auth::id()
     ]);
 
     return 'hello';

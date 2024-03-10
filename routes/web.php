@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Models\Article;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -81,17 +82,55 @@ Route::post('/articles', function(Request $request){
 //    $stmt->execute();
 
     // 쿼리를 실행
-    //DB 피사드를 이용하는 방법
-//    \Illuminate\Support\Facades\DB::statement("INSERT INTO articles (body, user_id) VALUES (:body, :userId)", [
+    //방법1: DB 피사드를 이용하는 방법
+//    DB::statement("INSERT INTO articles (body, user_id) VALUES (:body, :userId)", [
 //        'body' => $input['body'],
 //        'userId' => Auth::id(),
 //    ]);
 
-    //쿼리 빌더를 사용하는 방법
-    DB::table('articles')->insert([
-        'body'=>$input['body'],
-        'user_id'=>Auth::id()
-    ]);
+    //방법2. 쿼리 빌더를 사용하는 방법(php artisan tinker)
+//    DB::table('articles')->insert([
+//        'body'=>$input['body'],
+//        'user_id'=>Auth::id()
+//    ]);
+
+    //방법3. Eloquent ORM (터미널에 php artisan make:model Article 실행)
+    $article = new \App\Models\Article;
+    //dd($article);
+    $article->body = $input['body'];
+    //dd($article->body);
+    $article->user_id= Auth::id();
+    $article->save();
+    //dd($article);
+
+
+
+//    Article::create([
+//       'body' => $input['body'],
+//       'user_id' => Auth::id()
+//    ]);
+
+    //articles 테이블에서 id=4인 정보 보여줘.
+//    $result = DB::table('articles')->where('id', 4)->first();
+//    //dd($result);
+//    $article = new \App\Models\Article;
+//
+//    $article->body = $result->body;
+//    $article->user_id = $result->user_id;
+
+    //데이터가 변경됨     Object-Relational-Mapping ORM
+//    DB::table('articles')->update([
+//        'body' => $article->body
+//    ]);
+
+    //글을 작성한 사용자의 이름을 조회하고 싶다 -> users 테이블 조인해서 가져오기
+    //select name from
+//    DB::table('articles')->join('users', 'articles.user_id', '=', 'users.id')
+//        -> where('articles.id', 2)->first();
+
+    //위 코드를 아래 코드와 같이 할 수 있다.
+//    $article = Article::find(5);
+//    $article->user;
 
     return 'hello';
 });
